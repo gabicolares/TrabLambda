@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class App {
 
@@ -39,6 +41,11 @@ public class App {
         System.out.println("6. Funcionarios ordenados pelo código:");
 
         System.out.println("7. Funcionários ordenados pela idade+nome:");
+        lista = lista.stream()
+                    .sorted(Comparator.comparing(Pessoa::getIdade).thenComparing(Pessoa::getNome))
+                    .collect(Collectors.toList());
+
+        lista.forEach(System.out::println);
 
         System.out.println("8. Criar uma nova lista apenas com os funcionarios do financeiro:");
 
