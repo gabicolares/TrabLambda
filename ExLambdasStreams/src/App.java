@@ -3,6 +3,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.sound.sampled.SourceDataLine;
+
 public class App {
 
     public static void main(String[] args) {
@@ -29,10 +31,19 @@ public class App {
          *        apenas expressões lambda e operações de agregação
           */
         System.out.println("1. Funcionários do setor de vendas:");
+        List<Pessoa> vendas = lista.stream()
+                                    .filter((Pessoa p) -> p.getDpto() == Departamento.VENDAS)
+                                    .collect(Collectors.toList());
+        vendas.forEach(p->System.out.printf("\t -> %s\n", p.getNome()));
 
         System.out.println("2. Funcionários do setor de vendas com idade entre 20 e 30 anos");
+        List<Pessoa> vendas2030 = lista.stream()
+                                    .filter((Pessoa p) -> p.getDpto() == Departamento.VENDAS)
+                                    .filter((Pessoa p) -> p.getIdade() >= 20 && p.getIdade() <= 30)
+                                    .collect(Collectors.toList());
+        vendas2030.forEach(p->System.out.printf("\t %s -> %d\n", p.getNome(), p.getIdade()));
 
-        System.out.println("3. Nomes (em maiúsculas) dos funcionários do setor de vendas (usando reduce");
+        System.out.println("3. Nomes (em maiúsculas) dos funcionários do setor de vendas (usando reduce)");
 
         System.out.println("4. Todos os gerentes:");
 
